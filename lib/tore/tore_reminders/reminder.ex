@@ -5,10 +5,10 @@ defmodule Tore.ToreReminders.Reminder do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "reminders" do
-    field :period, :string
+    field :period, Ecto.Enum, values: [:hourly, :daily, :weekly, :monthly, :yearly, :oneoff]
     field :title, :string
     field :scheduled_at, :utc_datetime
-    field :finished_at, :utc_datetime
+    field :finished_at, :utc_datetime, default: nil
     has_many :notifications, Tore.ToreNotifications.Notification
 
     timestamps(type: :utc_datetime)
